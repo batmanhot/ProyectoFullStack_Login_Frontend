@@ -37,7 +37,9 @@ export default function Login() {
   const grabarDatos = async (email, password) => {
     // ... (existing logic)
     try {
-      const res = await axios.post('http://localhost:4000/api/login', { email, password });
+      //import.meta.env.VITE_URL_BACKEND 
+      //const res = await axios.post('http://localhost:4000/api/login', { email, password });
+      const res = await axios.post(import.meta.env.VITE_URL_BACKEND + '/api/login', { email, password });
       localStorage.setItem('token', res.data.token);
 
       toast.success('Login exitoso', { autoClose: 3000 });
@@ -58,7 +60,8 @@ export default function Login() {
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
-        const res = await axios.post('http://localhost:4000/api/google-login', {
+        //const res = await axios.post('http://localhost:4000/api/google-login', {
+        const res = await axios.post(import.meta.env.VITE_URL_BACKEND + '/api/google-login', {
           token: tokenResponse.access_token
         });
 
