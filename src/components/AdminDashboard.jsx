@@ -38,7 +38,8 @@ const AdminDashboard = () => {
             // And app uses /api prefix
             // But let's check if auth.routes.js is mounted on /api
             // Yes: app.use('/api', rutapp);
-            const res = await axios.get('http://localhost:4000/api/roles/admin/stats');
+            //const res = await axios.get('http://localhost:4000/api/roles/admin/stats');
+            const res = await axios.get(import.meta.env.VITE_URL_BACKEND + '/api/roles/admin/stats');
             setStats(res.data);
         } catch (error) {
             console.error(error);
@@ -49,7 +50,7 @@ const AdminDashboard = () => {
         try {
             const token = getToken();
             if (!token) return;
-            const res = await axios.get('http://localhost:4000/api/admin/users', {
+            const res = await axios.get(import.meta.env.VITE_URL_BACKEND + '/api/admin/users', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             setUsers(res.data);
@@ -63,7 +64,7 @@ const AdminDashboard = () => {
         try {
             const token = getToken();
             if (!token) return;
-            const res = await axios.get('http://localhost:4000/api/admin/audit', {
+            const res = await axios.get(import.meta.env.VITE_URL_BACKEND + '/api/admin/audit', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             setAuditLogs(res.data);
@@ -75,7 +76,7 @@ const AdminDashboard = () => {
     const handleRoleChange = async (id, newRole) => {
         try {
             const token = getToken();
-            await axios.patch(`http://localhost:4000/api/admin/users/${id}/role`, { role: newRole }, {
+            await axios.patch(import.meta.env.VITE_URL_BACKEND + '/api/admin/users/${id}/role', { role: newRole }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             toast.success("Rol actualizado");
@@ -88,7 +89,7 @@ const AdminDashboard = () => {
     const handleStatusChange = async (id, newStatus) => {
         try {
             const token = getToken();
-            await axios.patch(`http://localhost:4000/api/admin/users/${id}/status`, { active: newStatus }, {
+            await axios.patch(import.meta.env.VITE_URL_BACKEND + '/api/admin/users/${id}/status', { active: newStatus }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             toast.success("Estado actualizado");
@@ -101,7 +102,7 @@ const AdminDashboard = () => {
     const handleLogout = async () => {
         try {
             const token = getToken();
-            await axios.post('http://localhost:4000/api/logout', {}, {
+            await axios.post(import.meta.env.VITE_URL_BACKEND + '/api/logout', {}, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
         } catch (e) { console.error(e) }
