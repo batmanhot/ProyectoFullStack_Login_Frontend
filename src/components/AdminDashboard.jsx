@@ -76,7 +76,7 @@ const AdminDashboard = () => {
     const handleRoleChange = async (id, newRole) => {
         try {
             const token = getToken();
-            await axios.patch(import.meta.env.VITE_URL_BACKEND + '/api/admin/users/${id}/role', { role: newRole }, {
+            await axios.patch(import.meta.env.VITE_URL_BACKEND + '/api/admin/users/' + id + '/role', { role: newRole }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             toast.success("Rol actualizado");
@@ -89,7 +89,7 @@ const AdminDashboard = () => {
     const handleStatusChange = async (id, newStatus) => {
         try {
             const token = getToken();
-            await axios.patch(import.meta.env.VITE_URL_BACKEND + '/api/admin/users/${id}/status', { active: newStatus }, {
+            await axios.patch(import.meta.env.VITE_URL_BACKEND + '/api/admin/users/' + id + '/status', { active: newStatus }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             toast.success("Estado actualizado");

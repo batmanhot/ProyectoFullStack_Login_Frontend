@@ -12,7 +12,7 @@ export default function Dashboard() {
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    axios.get('http://localhost:4000/api/dashboard', {
+    axios.get(import.meta.env.VITE_URL_BACKEND + '/api/dashboard', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => setMessage(res.data.message))
@@ -20,6 +20,7 @@ export default function Dashboard() {
 
     // Cargar métricas
     axios.get("/roles/admin/stats").then(res => setStats(res.data));
+    //axios.get(import.meta.env.VITE_URL_BACKEND + '/roles/admin/stats').then(res => setStats(res.data));
 
     // Cargar usuarios
     //axios.get("/roles/admin/users").then(res => setUsers(res.data));

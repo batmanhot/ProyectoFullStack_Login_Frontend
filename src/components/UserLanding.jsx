@@ -8,7 +8,7 @@ const UserLanding = () => {
     const handleLogout = async () => {
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:4000/api/logout', {}, {
+            await axios.post(import.meta.env.VITE_URL_BACKEND + '/api/logout', {}, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
         } catch (e) { console.error(e) }
